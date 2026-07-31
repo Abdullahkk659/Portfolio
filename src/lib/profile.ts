@@ -13,7 +13,7 @@ export const profile = {
   email: "abdullahqudoos10@gmail.com", // CONFIRM: you wrote "abdullahqudoos10" without a domain
   socials: {
     github: "https://github.com/Abdullahkk659",
-    linkedin: "https://linkedin.com/in/yourhandle", // TODO
+    linkedin: "www.linkedin.com/in/abdullah-qudoos-637342288", // TODO
     x: "#", // TODO
   },
   photo: "/me.jpg", // drop your portrait here — grayscale is applied in CSS
