@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { profile } from "@/lib/profile";
 
-const SECTIONS = ["top", "work", "stack", "contact"];
+const SECTIONS = ["top", "work", "stack", "certificates", "contact"];
 
 export function Rail() {
   const [active, setActive] = useState("top");
@@ -38,6 +38,12 @@ export function Rail() {
         <path d="M3 13l9 5 9-5" />
       </>
     ),
+    certificates: (
+      <>
+        <circle cx="12" cy="9" r="6" />
+        <path d="M8.5 14L7 22l5-2.5L17 22l-1.5-8" />
+      </>
+    ),
     contact: (
       <>
         <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -50,7 +56,7 @@ export function Rail() {
     <nav className="rail" aria-label="Sections">
       {SECTIONS.map((id) => (
         <a key={id} href={`#${id}`} className={active === id ? "on" : undefined}>
-          <span>{id === "top" ? "Home" : id}</span>
+          <span>{id === "top" ? "Home" : id === "certificates" ? "Awards" : id}</span>
           <svg viewBox="0 0 24 24">{icons[id]}</svg>
         </a>
       ))}

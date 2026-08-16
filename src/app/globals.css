@@ -238,3 +238,27 @@ footer{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;paddin
   html{scroll-behavior:auto}
   .rise{opacity:1;transform:none}
 }
+
+/* ---------- certificates ---------- */
+.certs{margin-top:clamp(70px,9vw,130px)}
+.certgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2vw,26px);margin-top:30px}
+.cert{display:block;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--panel);
+  transition:border-color .25s,transform .25s}
+.cert:hover{border-color:rgba(31,182,255,.42);transform:translateY(-3px)}
+.cert figure{margin:0;position:relative;aspect-ratio:1.42;overflow:hidden;background:#0A0D11}
+.cert figure img{width:100%;height:100%;object-fit:cover;object-position:center;
+  opacity:.82;transition:opacity .25s,transform .5s cubic-bezier(.2,.7,.2,1)}
+.cert:hover figure img{opacity:1;transform:scale(1.02)}
+.cert figure::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 55%,rgba(13,16,20,.9) 100%)}
+.cert__body{padding:17px 19px 19px}
+.cert__top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.cert h3{font-family:var(--display);font-weight:700;font-size:clamp(17px,1.65vw,21px);letter-spacing:-.025em;margin:0;
+  transition:color .25s}
+.cert:hover h3{color:var(--neon)}
+.cert__date{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.cert__detail{margin:8px 0 0;font-size:13.5px;color:#98A3B2}
+.cert__issuer{margin:9px 0 0;font-size:12.5px;color:var(--muted);line-height:1.5}
+.cert__view{display:inline-flex;align-items:center;gap:6px;margin-top:13px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--neon)}
+@media(max-width:760px){.certgrid{grid-template-columns:1fr}}
