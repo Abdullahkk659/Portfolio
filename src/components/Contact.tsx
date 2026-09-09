@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { profile } from "@/lib/profile";
+import { href, profile } from "@/lib/profile";
 
 type State = "idle" | "sending" | "sent" | "error";
 
@@ -51,10 +51,10 @@ export default function Contact() {
           </p>
           <div className="pills">
             <a href={`mailto:${profile.email}`}>{profile.email}</a>
-            <a href={profile.socials.github} target="_blank" rel="noopener noreferrer">
+            <a href={href(profile.socials.github)} target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
-            <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer">
+            <a href={href(profile.socials.linkedin)} target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
             <span>{profile.location}</span>

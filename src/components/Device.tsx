@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { benchmarkScores, profile, projects } from "@/lib/profile";
+import { benchmarkScores, profile, projects, type Project } from "@/lib/profile";
 
 function Clock() {
   const [time, setTime] = useState("—:—");
@@ -21,46 +21,38 @@ function Clock() {
   return <span suppressHydrationWarning>{time}</span>;
 }
 
-function NovaScreen() {
+function BizPlanScreen() {
+  const sections = [
+    ["Executive summary", true],
+    ["Market analysis", true],
+    ["Competitive landscape", true],
+    ["Financial projections", false],
+  ] as const;
   return (
     <>
       <div className="vhead">
-        <span className="name">nova</span>
-        <span className="live">
-          <i />3 new posts
-        </span>
+        <span className="name">Plan</span>
+        <span className="chip">Step 4 / 5</span>
       </div>
-      <div className="card">
-        <div className="row">
-          <span className="av" />
-          <div>
-            <div style={{ fontSize: 13, fontWeight: 600 }}>{`${profile.name.toLowerCase()}.dev`}</div>
-            <div className="tiny" style={{ fontSize: 10 }}>
-              {profile.location.split(",")[0]}
-            </div>
-          </div>
+      <div className="prog">
+        <i style={{ width: "72%" }} />
+      </div>
+
+      {sections.map(([label, done]) => (
+        <div className="opt" key={label} style={done ? undefined : { opacity: 0.55 }}>
+          {label}
+          <span style={{ color: done ? "var(--neon)" : "rgba(255,255,255,.4)" }}>
+            {done ? "\u2713" : "\u00b7\u00b7\u00b7"}
+          </span>
         </div>
-        <div className="media" />
+      ))}
+
+      <div className="card" style={{ marginTop: "auto" }}>
         <div className="tiny">
-          Shipped the live feed today — Firestore listeners, no refresh button anywhere.
+          Demo mode — served from pre-generated plans, so the live site makes no API calls.
         </div>
       </div>
-      <div className="card" style={{ opacity: 0.5 }}>
-        <div className="row">
-          <span
-            className="av"
-            style={{ background: "linear-gradient(135deg,#7FE4FF,#0A6FD8)" }}
-          />
-          <div style={{ fontSize: 13, fontWeight: 600 }}>novagram</div>
-        </div>
-        <div
-          className="media"
-          style={{ height: 72 }}
-        />
-      </div>
-      <div style={{ marginTop: "auto" }}>
-        <span className="chip">Firestore · FCM · Cloudinary</span>
-      </div>
+      <span className="chip">Nine sections · PDF export</span>
     </>
   );
 }
@@ -180,7 +172,58 @@ function MalwareScreen() {
   );
 }
 
-const screens = [NovaScreen, InsightScreen, BenchmarkScreen, MalwareScreen];
+/**
+ * Fallback screen. Any project without a hand-built screen below gets this one,
+ * generated from its own title, bullets and tags — so adding a project to
+ * profile.ts is enough. Nothing else needs editing.
+ */
+function GenericScreen({ project }: { project: Project }) {
+  return (
+    <>
+      <div className="vhead">
+        <span className="name">{project.title.split(" ")[0]}</span>
+        <span className="chip">{project.tags[0]}</span>
+      </div>
+      <div className="card">
+        <div className="mono" style={{ fontSize: 9.5, color: "var(--neon)" }}>
+          {project.eyebrow.split("·")[0].trim()}
+        </div>
+        <div
+          style={{
+            fontFamily: "var(--display)",
+            fontWeight: 700,
+            fontSize: 18,
+            letterSpacing: "-.02em",
+            marginTop: 6,
+            lineHeight: 1.2,
+          }}
+        >
+          {project.title}
+        </div>
+      </div>
+      {project.bullets.slice(0, 3).map((b) => (
+        <div className="opt" key={b} style={{ fontSize: 12, lineHeight: 1.4 }}>
+          {b.length > 74 ? `${b.slice(0, 74)}…` : b}
+        </div>
+      ))}
+      <div className="tags" style={{ marginTop: "auto" }}>
+        {project.tags.slice(0, 4).map((t) => (
+          <span className="tag" key={t}>
+            {t}
+          </span>
+        ))}
+      </div>
+    </>
+  );
+}
+
+/** Hand-built screens, keyed by project slug. Optional — see GenericScreen above. */
+const customScreens: Record<string, () => React.JSX.Element> = {
+  bizplan: BizPlanScreen,
+  insighthire: InsightScreen,
+  benchmark: BenchmarkScreen,
+  malware: MalwareScreen,
+};
 
 export default function Device({
   active,
@@ -201,15 +244,18 @@ export default function Device({
           </span>
         </div>
         <div className="app">
-          {screens.map((Screen, i) => (
-            <div
-              key={projects[i].slug}
-              className={`view${i === active ? " on" : ""}`}
-              aria-hidden={i !== active}
-            >
-              <Screen />
-            </div>
-          ))}
+          {projects.map((p, i) => {
+            const Screen = customScreens[p.slug];
+            return (
+              <div
+                key={p.slug}
+                className={`view${i === active ? " on" : ""}`}
+                aria-hidden={i !== active}
+              >
+                {Screen ? <Screen /> : <GenericScreen project={p} />}
+              </div>
+            );
+          })}
         </div>
         <div className="tabs" role="tablist" aria-label="Project screens">
           {projects.map((p, i) => (

@@ -2,7 +2,7 @@ import { Rail, Topline } from "@/components/Chrome";
 import Hero from "@/components/Hero";
 import Stage from "@/components/Stage";
 import Contact from "@/components/Contact";
-import { profile, stack } from "@/lib/profile";
+import { certificates, profile, stack } from "@/lib/profile";
 
 export default function Home() {
   return (
@@ -29,6 +29,38 @@ export default function Home() {
                   ))}
                 </ul>
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="certs" id="certificates">
+          <div className="shead">
+            <h2>Recognition</h2>
+            <span className="mono">GIFT University</span>
+          </div>
+          <div className="certgrid">
+            {certificates.map((c) => (
+              <a
+                key={c.title}
+                className="cert"
+                href={c.file}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <figure>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={c.thumb} alt={`${c.title} certificate`} loading="lazy" />
+                </figure>
+                <div className="cert__body">
+                  <div className="cert__top">
+                    <h3>{c.title}</h3>
+                    <span className="cert__date">{c.date}</span>
+                  </div>
+                  <p className="cert__detail">{c.detail}</p>
+                  <p className="cert__issuer">{c.issuer}</p>
+                  <span className="cert__view">View certificate &#8599;</span>
+                </div>
+              </a>
             ))}
           </div>
         </section>

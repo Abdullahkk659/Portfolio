@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Device from "./Device";
-import { projects } from "@/lib/profile";
+import { href, projects } from "@/lib/profile";
 
 export default function Stage() {
   const [active, setActive] = useState(0);
@@ -47,17 +47,18 @@ export default function Stage() {
             <p className="mono">{p.eyebrow}</p>
             <h3>
               {p.title}
-              {p.href && (
+              {p.links?.map((l) => (
                 <a
+                  key={l.url}
                   className="link"
-                  href={p.href}
+                  href={href(l.url)}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {p.hrefLabel} &#8599;
+                  {l.label} &#8599;
                 </a>
-              )}
+              ))}
             </h3>
             <p>{p.summary}</p>
             <ul>
