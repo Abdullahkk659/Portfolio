@@ -43,7 +43,7 @@ export const profile = {
   badgeText: "· open to internships · freelance · gujranwala pk ",
   tools: ["React Native", "React", "Node.js", "Firebase", "Python"],
   facts: [
-    { value: "4", label: "Shipped builds" },
+    { value: "5", label: "Shipped builds" },
     { value: "3", label: "Classifiers from scratch" },
     { value: "80+", label: "Flow features modelled" },
   ],
@@ -108,6 +108,21 @@ export const projects: Project[] = [
       "Public deploy runs in demo mode on pre-generated plans, so the live site makes no API calls: nothing to leak, nothing to bill",
     ],
     tags: ["React", "Vite", "Express", "Anthropic API", "Firebase", "Tailwind"],
+  },
+  {
+    slug: "pulsecheck",
+    title: "PulseCheck — API Uptime Monitoring",
+    eyebrow: "Full stack · React · Express · JWT",
+    links: [{ label: "Source", url: "https://github.com/Abdullahkk659/PulseCheck" }],
+    summary:
+      "A monitoring service that polls your endpoints on a schedule and tells you the moment one stops responding — with the alert arriving in Slack rather than a dashboard you have to remember to check.",
+    bullets: [
+      "Express backend that runs scheduled health checks and records uptime history per endpoint",
+      "Real Slack webhook delivery on failure, not a simulated notification",
+      "JWT authentication with hashed passwords; secrets kept in environment variables and out of version control",
+      "React + Vite dashboard with Tailwind and Framer Motion",
+    ],
+    tags: ["React", "Vite", "Express", "JWT", "Tailwind", "Slack API"],
   },
   {
     slug: "insighthire",
