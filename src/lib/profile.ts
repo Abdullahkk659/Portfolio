@@ -17,11 +17,11 @@ export function href(url: string): string {
 
 export const profile = {
   name: "Abdullah",
-  role: "Mobile & Full-Stack Developer",
+  role: "Backend & Full-Stack Developer",
   location: "Gujranwala, Pakistan",
   education: "BS Computer Science, GIFT University",
   timezone: "Asia/Karachi",
-  status: "Open to internships & freelance",
+  status: "Open to backend internships, junior roles & remote",
   email: "abdullahqudoos10@gmail.com", // CONFIRM: you wrote "abdullahqudoos10" without a domain
   socials: {
     github: "https://github.com/Abdullahkk659",
@@ -31,21 +31,21 @@ export const profile = {
   photo: "/me.jpg", // drop your portrait here — grayscale is applied in CSS
   cvUrl: "/abdullah-abdul-qudoos-cv.pdf",
   intro:
-    "I build mobile and web apps end to end — the screen, the API, the database and the notification that reaches your phone. Based in Gujranwala.",
+    "I build the backend behind real products — APIs, databases, payments and real-time updates — and the app on top when it needs one. Final-year CS student in Gujranwala, open to remote work.",
   /** Headline renders as: plain text, then each `hl` word as a neon pill. */
   headline: [
     { text: "I build " },
-    { text: "apps", hl: "solid" },
+    { text: "backends", hl: "solid" },
     { text: " " },
-    { text: "& interfaces", hl: "ghost" },
-    { text: " that people actually keep installed" },
+    { text: "& apps", hl: "ghost" },
+    { text: " that real businesses run on" },
   ] as { text: string; hl?: "solid" | "ghost" }[],
-  badgeText: "· open to internships · freelance · gujranwala pk ",
-  tools: ["React Native", "React", "Node.js", "Firebase", "Python"],
+  badgeText: "· backend · node.js · postgres · open to remote ",
+  tools: ["Node.js", "PostgreSQL", "Docker", "React", "React Native"],
   facts: [
     { value: "6", label: "Shipped builds" },
-    { value: "3", label: "Classifiers from scratch" },
-    { value: "80+", label: "Flow features modelled" },
+    { value: "50", label: "Concurrent orders, 0 duplicates" },
+    { value: "24", label: "End-to-end tests" },
   ],
 };
 
@@ -99,14 +99,29 @@ export const projects: Project[] = [
     summary:
       "A home bakery in Gujranwala needed to take orders online and deliver across the city without a developer on call. Customers order on the site, see the delivery fee before they pay and follow their order live; the kitchen phone gets an alert the moment an order lands.",
     bullets: [
-      "Checkout with distance-based delivery pricing from a map pin, calculated on the server so prices can't be changed in the browser",
-      "Bank transfer payments confirmed from a kitchen app; signed JazzCash checkout built in, waiting on merchant approval",
-      "Live order tracking over server-sent events, with Postgres LISTEN/NOTIFY pushing each change to every open screen",
-      "Rider location sharing from a WhatsApp link, no app needed — shown on the customer's page and on one kitchen map for all active riders",
-      "Duplicate-proof order API, tested with 50 simultaneous orders; 24 end-to-end tests against a real Postgres database",
-      "Self-hosted on an Oracle Cloud ARM server with Docker Compose, automatic HTTPS and daily backups",
+      "Stopped duplicate orders and price tampering — 0 duplicates across 50 simultaneous submissions — with idempotency keys and server-side pricing inside PostgreSQL transactions",
+      "Delivery fee calculated on the server from the customer's map pin, so the total shown before payment is the total charged",
+      "Every status change reaches the customer, kitchen and rider screens instantly: PostgreSQL LISTEN/NOTIFY feeding server-sent events",
+      "Live rider location from a WhatsApp link, no app install — shown on the customer's page and on one kitchen map for all active riders",
+      "Bank transfers confirmed from a kitchen web app with push alerts; JazzCash checkout built with HMAC-signed requests, verified callbacks and a reconciliation job",
+      "24 end-to-end tests against a real database; self-hosted on Oracle Cloud ARM with Docker Compose, automatic HTTPS and daily backups",
     ],
     tags: ["Node.js", "Fastify", "PostgreSQL", "Docker", "Leaflet", "GSAP", "Web Push"],
+  },
+  {
+    slug: "pulsecheck",
+    title: "PulseCheck — API Uptime Monitoring",
+    eyebrow: "Full stack · React · Express · JWT",
+    links: [{ label: "Source", url: "https://github.com/Abdullahkk659/PulseCheck" }],
+    summary:
+      "A monitoring service that polls your endpoints on a schedule and tells you the moment one stops responding — with the alert arriving in Slack rather than a dashboard you have to remember to check.",
+    bullets: [
+      "Express backend that runs scheduled health checks and records uptime history per endpoint",
+      "Real Slack webhook delivery on failure, not a simulated notification",
+      "JWT authentication with hashed passwords; secrets kept in environment variables and out of version control",
+      "React + Vite dashboard with Tailwind and Framer Motion",
+    ],
+    tags: ["React", "Vite", "Express", "JWT", "Tailwind", "Slack API"],
   },
   {
     slug: "bizplan",
@@ -125,21 +140,6 @@ export const projects: Project[] = [
       "Public deploy runs in demo mode on pre-generated plans, so the live site makes no API calls: nothing to leak, nothing to bill",
     ],
     tags: ["React", "Vite", "Express", "Anthropic API", "Firebase", "Tailwind"],
-  },
-  {
-    slug: "pulsecheck",
-    title: "PulseCheck — API Uptime Monitoring",
-    eyebrow: "Full stack · React · Express · JWT",
-    links: [{ label: "Source", url: "https://github.com/Abdullahkk659/PulseCheck" }],
-    summary:
-      "A monitoring service that polls your endpoints on a schedule and tells you the moment one stops responding — with the alert arriving in Slack rather than a dashboard you have to remember to check.",
-    bullets: [
-      "Express backend that runs scheduled health checks and records uptime history per endpoint",
-      "Real Slack webhook delivery on failure, not a simulated notification",
-      "JWT authentication with hashed passwords; secrets kept in environment variables and out of version control",
-      "React + Vite dashboard with Tailwind and Framer Motion",
-    ],
-    tags: ["React", "Vite", "Express", "JWT", "Tailwind", "Slack API"],
   },
   {
     slug: "insighthire",
@@ -227,19 +227,19 @@ export const certificates: Certificate[] = [
 
 export const stack = [
   {
-    group: "Frontend",
-    items: ["React.js", "React Native", "JavaScript (ES6+)", "HTML5 & CSS3", "Responsive design"],
-  },
-  {
     group: "Backend",
-    items: ["Node.js", "REST APIs", "Firebase Auth", "Firestore & Storage", "Cloud Messaging"],
+    items: ["Node.js", "Fastify & Express", "REST APIs & SSE", "Auth (JWT)", "Spring Boot — learning"],
   },
   {
     group: "Data",
-    items: ["PostgreSQL", "MongoDB", "SQL", "Firestore", "Cloudinary"],
+    items: ["PostgreSQL", "SQL & transactions", "MongoDB", "Firestore", "Python & Pandas"],
   },
   {
-    group: "Machine learning",
-    items: ["Python", "Scikit-learn", "Pandas & NumPy", "EDA & cleaning", "Model evaluation"],
+    group: "Infrastructure",
+    items: ["Docker & Compose", "Linux servers", "Caddy / HTTPS", "Backups", "Git & GitHub"],
+  },
+  {
+    group: "Frontend & mobile",
+    items: ["React", "React Native", "JavaScript (ES6+)", "HTML5 & CSS3", "Firebase Auth & FCM"],
   },
 ];

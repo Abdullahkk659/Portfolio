@@ -17,7 +17,7 @@ export default function Home() {
         <section className="band" id="stack">
           <div className="shead" style={{ border: 0, padding: 0 }}>
             <h2>What I work with</h2>
-            <span className="mono">Front &rarr; back &rarr; data</span>
+            <span className="mono">API &rarr; data &rarr; deploy</span>
           </div>
           <div className="grid4">
             {stack.map((col) => (

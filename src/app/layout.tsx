@@ -24,7 +24,7 @@ const mono = DM_Mono({
 
 const title = `${profile.name} — ${profile.role}`;
 const description =
-  "React Native and React on the front, Node and Firebase behind it. Real-time apps, REST APIs and machine learning, built in Gujranwala.";
+  "Backend and full-stack developer in Gujranwala, Pakistan. Node.js, PostgreSQL and Docker in production, React and React Native on the front. Open to internships, junior roles and remote work.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
