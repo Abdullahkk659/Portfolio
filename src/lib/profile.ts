@@ -43,7 +43,7 @@ export const profile = {
   badgeText: "· open to internships · freelance · gujranwala pk ",
   tools: ["React Native", "React", "Node.js", "Firebase", "Python"],
   facts: [
-    { value: "5", label: "Shipped builds" },
+    { value: "6", label: "Shipped builds" },
     { value: "3", label: "Classifiers from scratch" },
     { value: "80+", label: "Flow features modelled" },
   ],
@@ -91,6 +91,23 @@ export type Project = {
    ============================================================================ */
 
 export const projects: Project[] = [
+  {
+    slug: "rosheen",
+    title: "Rosheen Bakes — online ordering for a home bakery",
+    eyebrow: "Full stack · Node.js · PostgreSQL · Live business",
+    links: [{ label: "rosheenbakes.duckdns.org", url: "https://rosheenbakes.duckdns.org" }],
+    summary:
+      "A home bakery in Gujranwala needed to take orders online and deliver across the city without a developer on call. Customers order on the site, see the delivery fee before they pay and follow their order live; the kitchen phone gets an alert the moment an order lands.",
+    bullets: [
+      "Checkout with distance-based delivery pricing from a map pin, calculated on the server so prices can't be changed in the browser",
+      "Bank transfer payments confirmed from a kitchen app; signed JazzCash checkout built in, waiting on merchant approval",
+      "Live order tracking over server-sent events, with Postgres LISTEN/NOTIFY pushing each change to every open screen",
+      "Rider location sharing from a WhatsApp link, no app needed — shown on the customer's page and on one kitchen map for all active riders",
+      "Duplicate-proof order API, tested with 50 simultaneous orders; 24 end-to-end tests against a real Postgres database",
+      "Self-hosted on an Oracle Cloud ARM server with Docker Compose, automatic HTTPS and daily backups",
+    ],
+    tags: ["Node.js", "Fastify", "PostgreSQL", "Docker", "Leaflet", "GSAP", "Web Push"],
+  },
   {
     slug: "bizplan",
     title: "AI Business Plan Generator",

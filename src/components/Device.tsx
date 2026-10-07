@@ -21,6 +21,47 @@ function Clock() {
   return <span suppressHydrationWarning>{time}</span>;
 }
 
+function RosheenScreen() {
+  const steps = [
+    ["Order received", "done"],
+    ["Payment confirmed", "done"],
+    ["Baking", "done"],
+    ["With the courier", "now"],
+    ["Delivered", "next"],
+  ] as const;
+  return (
+    <>
+      <div className="vhead">
+        <span className="name">RB-1042</span>
+        <span className="chip">Live</span>
+      </div>
+
+      {steps.map(([label, state]) => (
+        <div
+          key={label}
+          className={`opt${state === "now" ? " sel" : ""}`}
+          style={{ padding: "9px 12px", marginBottom: 7, ...(state === "next" ? { opacity: 0.5 } : {}) }}
+        >
+          {label}
+          <span style={{ color: state === "next" ? "rgba(255,255,255,.4)" : "var(--neon)" }}>
+            {state === "done" ? "✓" : state === "now" ? "●" : "···"}
+          </span>
+        </div>
+      ))}
+
+      <div className="card" style={{ marginTop: "auto" }}>
+        <div className="mono" style={{ fontSize: 9.5, color: "var(--neon)" }}>
+          Rider on the way
+        </div>
+        <div className="tiny" style={{ marginTop: 5, color: "#fff" }}>
+          Bilal &middot; 1.2 km away &middot; updated 8s ago
+        </div>
+      </div>
+      <span className="chip">2 &times; Lotus Cake &middot; Rs 1,370</span>
+    </>
+  );
+}
+
 function BizPlanScreen() {
   const sections = [
     ["Executive summary", true],
@@ -219,6 +260,7 @@ function GenericScreen({ project }: { project: Project }) {
 
 /** Hand-built screens, keyed by project slug. Optional — see GenericScreen above. */
 const customScreens: Record<string, () => React.JSX.Element> = {
+  rosheen: RosheenScreen,
   bizplan: BizPlanScreen,
   insighthire: InsightScreen,
   benchmark: BenchmarkScreen,
